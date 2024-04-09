@@ -2,15 +2,32 @@ package org.example;
 
 public class Main {
     public static void main(String[] args) {
-        System.out.println("Hello Diego!");
-
-        Persona persona1 = new Persona();
-        Persona persona2 = new Persona(1, "Diego", 1.75);
-
-        persona1.setIdPersona(x -> System.out.println(x));
-        IdPersona a = persona1.getIdPersona();
-        a.mostrarId(7);
-
-
+        doSomethingTraditional();
+        doSomethingAnonimusClass();
+        doSomethingFunctional();
     }
+
+    public static void doSomethingTraditional(){
+        var tux1 = new Tux();
+        System.out.println(tux1.doSomething("VALOR TRADICIONAL"));
+    }
+
+    public static void doSomethingAnonimusClass(){
+        var tux1 = new MyFunctionalInterface() {
+            @Override
+            public String doSomething(String param) {
+                return "Hola soy Tux y recibi el siguiente parametro: " + param + " por classe anonima";
+            }
+        };
+        System.out.println(tux1.doSomething("VALOR CLASE ANONIMA"));
+    }
+
+    public static void doSomethingFunctional(){
+        // respetando la firma de la interfaz functional
+        MyFunctionalInterface tux1 = (param) -> {
+            return "Hola soy Tux y recibi el siguiente parametro: " + param + " por interfaz funcional";
+        };
+        System.out.println(tux1.doSomething("VALOR FUNCIONAL"));
+    }
+
 }
